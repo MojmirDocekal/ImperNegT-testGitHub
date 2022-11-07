@@ -1,0 +1,34 @@
+- imperfective imperatives
+
+[tag="Vi..........I.*"]
+
+- first 8 (lexical)
+
+vidět
+dělat
+bát
+věřit
+běžet
+říkat
+poslouchat
+myslet
+
+- perfective imperatives
+
+[tag="Vi..........P.*"]
+
+- first 8 (lexical)
+
+dát
+podívat
+říci
+zkusit
+prominout
+vzít
+přidat
+zapomenout
+
+- negated imperative
+
+[lemma="vidět" & tag="Vi........N.I.*"]
+...
