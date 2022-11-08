@@ -1,11 +1,15 @@
-- first let's load the data
-- then compute proportion frequency
+-   first let's load the data
+-   then compute proportion frequency
 
 ```{r}
 df <- read.csv("cnk_data.csv")
 
 df$proportion_freq <- as.numeric(df$proportion_freq)
 df$proportion_freq <- df$negated.imperative/df$absolute_frequency
+
+library(ggplot2)
+
+
 
 t.test(df$proportion_freq[df$aspect == "imperfective"], df$proportion_freq[df$aspect == "perfective"])
 
@@ -23,4 +27,3 @@ plot(bayesTtest)
 
 summary(bayesTtest)
 ```
-
