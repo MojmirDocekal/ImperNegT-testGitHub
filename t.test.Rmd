@@ -1,6 +1,43 @@
 -   first let's load the data
 -   then compute proportion frequency
 
+- data phase 1: 10 verbs
+- too much noise (BayesTtest correct warning)
+
+```{r}
+df <- read.csv("cnk_data.csv")
+
+df$proportion_freq <- as.numeric(df$proportion_freq)
+df$proportion_freq <- df$negated.imperative/df$absolute_frequency
+
+library(ggplot2)
+library(dplyr)
+
+p <- df %>%
+  ggplot( aes(x = negated.imperative, fill = aspect)) +
+  geom_histogram(position = 'identity', binwidth = 150)
+p
+
+p2 <- df %>%
+  ggplot( aes(x = proportion_freq, fill = aspect)) +
+  geom_histogram(position = 'identity')
+p2
+
+
+t.test(df$proportion_freq[df$aspect == "imperfective"], df$proportion_freq[df$aspect == "perfective"])
+
+t.test(df$negated.imperative[df$aspect == "imperfective"], df$negated.imperative[df$aspect == "perfective"])
+
+library(BEST)
+
+bayesTtest <- BESTmcmc(df$negated.imperative[df$aspect == "imperfective"], df$negated.imperative[df$aspect == "perfective"])
+
+summary(bayesTtest)
+plot(bayesTtest)
+```
+
+- better data: around 30 verbs
+
 ```{r}
 #df <- read.csv("cnk_data.csv")
 df <- read.csv("cnk_data_slouceno.csv")
