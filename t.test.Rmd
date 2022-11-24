@@ -2,7 +2,8 @@
 -   then compute proportion frequency
 
 ```{r}
-df <- read.csv("cnk_data.csv")
+#df <- read.csv("cnk_data.csv")
+df <- read.csv("cnk_data_slouceno.csv")
 
 df$proportion_freq <- as.numeric(df$proportion_freq)
 df$proportion_freq <- df$negated.imperative/df$absolute_frequency
@@ -24,7 +25,12 @@ p2
 t.test(df$proportion_freq[df$aspect == "imperfective"], df$proportion_freq[df$aspect == "perfective"])
 
 t.test(df$negated.imperative[df$aspect == "imperfective"], df$negated.imperative[df$aspect == "perfective"])
+```
 
+- Bayesian version below (can crash on some data)
+- first for the non-proportional data
+
+```{r, eval = TRUE}
 library(BEST)
 library(BayesFactor)
 
@@ -37,3 +43,18 @@ plot(bayesTtest)
 
 summary(bayesTtest)
 ```
+
+- now for the proportional data
+
+```{r}
+
+bayesTtestProp <- BESTmcmc(df$proportion_freq[df$aspect == "imperfective"], df$proportion_freq[df$aspect == "perfective"])
+
+summary(bayesTtestProp)
+
+plot(bayesTtestProp)
+
+bayesTtest
+bayesTtestProp
+```
+
